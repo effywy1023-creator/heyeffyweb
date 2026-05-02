@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Effy — Where the body begins to speak</title>
+<meta name="description" content="A practice of Pilates and Feldenkrais — for the modern body, its tensions, its lost sense of itself." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Cooler, more neutral palette — bone / stone / linen */
+    --bg:        #EDE9E0;          /* cool linen, slight green-grey undertone */
+    --bg-deep:   #E2DDD2;          /* soft stone */
+    --ink:       #2B2A26;          /* near-black, warm dark stone */
+    --ink-soft:  #6E6B62;           /* mid stone-grey */
+    --ink-faint: #A8A39A;           /* light stone */
+    --ink-line:  #C7C2B8;           /* hairline */
+
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --max: 1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* very subtle paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.22;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.15  0 0 0 0 0.12  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 2; }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* —————————————————————————————
+     Decorative bits
+     ————————————————————————————— */
+
+  /* Oval logo (Diptyque signature) */
+  .logo-oval {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    padding: 0.55rem 1.6rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.5s ease;
+  }
+  .logo-oval span {
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    padding-right: 0;
+    padding-left: 0.5em; /* compensate letter-spacing */
+  }
+  .logo-oval:hover { background: var(--ink); color: var(--bg); }
+
+  /* Section icon — line illustration in a thin circle */
+  .icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 2rem;
+    display: block;
+  }
+  .icon circle.frame {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 0.8;
+  }
+  .icon path, .icon line, .icon polyline, .icon circle.dot {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 0.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .icon circle.dot { fill: var(--ink); stroke: none; }
+
+  /* decorative divider — line · diamond · line */
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 0 auto;
+    width: 220px;
+    color: var(--ink-faint);
+  }
+  .ornament .line {
+    flex: 1;
+    height: 1px;
+    background: var(--ink-line);
+  }
+  .ornament .diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--ink-soft);
+    transform: rotate(45deg);
+  }
+
+  /* —————————————————————————————
+     Top nav
+     ————————————————————————————— */
+  header.top { padding: 2rem 0; }
+  .top-inner { display: flex; align-items: center; justify-content: space-between; }
+  nav.primary { display: flex; gap: 2.5rem; }
+  nav.primary a {
+    font-size: 0.74rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.4s ease;
+  }
+  nav.primary a:hover { color: var(--ink); }
+  @media (max-width: 720px) { nav.primary { display: none; } }
+
+  /* —————————————————————————————
+     Hero
+     ————————————————————————————— */
+  .hero { padding: 8rem 0 11rem; text-align: center; }
+  .hero h1 {
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(2.6rem, 7vw, 5.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 auto;
+    max-width: 17ch;
+    color: var(--ink);
+    opacity: 0;
+    animation: rise 1.4s 0.3s ease-out forwards;
+  }
+  .hero .subline {
+    margin: 3.5rem auto 0;
+    max-width: 50ch;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0;
+    animation: rise 1.2s 0.9s ease-out forwards;
+  }
+  .hero .journey-cities {
+    margin: 1.8rem auto 0;
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    opacity: 0;
+    animation: rise 1.2s 1.2s ease-out forwards;
+  }
+  .hero .journey-cities .sep {
+    color: var(--ink-faint);
+    letter-spacing: 0;
+    font-size: 0.85rem;
+  }
+  .hero::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 72px;
+    background: var(--ink-line);
+    margin: 5rem auto 0;
+    opacity: 0;
+    animation: rise 1.2s 1.4s ease-out forwards;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* —————————————————————————————
+     Spread (image + caption)
+     ————————————————————————————— */
+  section.spread { padding: 7rem 0; }
+  .spread-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .spread-inner.flip > .image { order: 2; }
+  @media (max-width: 880px) {
+    .spread-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .spread-inner.flip > .image { order: 0; }
+  }
+
+  .image .frame {
+    aspect-ratio: 4 / 5;
+    background: var(--bg-deep);
+    border: 1px solid var(--ink-line);
+    display: grid;
+    place-items: center;
+    color: var(--ink-faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    overflow: hidden;
+  }
+  .image .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Treasure map is wider — designed image, show it fully */
+  .image .frame.map {
+    aspect-ratio: 940 / 400;
+  }
+  .image .frame.map img {
+    object-fit: contain;
+    background: #d8d2c4;
+  }
+
+  .copy .eyebrow { display: block; margin-bottom: 1.6rem; }
+  .copy h2 {
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 1.6rem;
+    max-width: 16ch;
+  }
+  .copy p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink);
+    margin: 0;
+    max-width: 32ch;
+  }
+  .copy p + p { margin-top: 1rem; }
+
+  a.discover {
+    display: inline-block;
+    margin-top: 2.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    transition: letter-spacing 0.4s ease, opacity 0.3s ease;
+  }
+  a.discover:hover { letter-spacing: 0.36em; opacity: 0.7; }
+
+  /* "Coming soon" — like a quiet exhibition placard */
+  .coming-soon {
+    display: inline-block;
+    margin-top: 2.2rem;
+    padding: 0.45rem 1.4rem;
+    border: 1px solid var(--ink-faint);
+    border-radius: 999px;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Treasure map full-width banner */
+  .treasure-banner {
+    max-width: 940px;
+    margin: 0 auto;
+    border: 1px solid var(--ink-line);
+    overflow: hidden;
+    line-height: 0;
+  }
+  .treasure-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .treasure-copy {
+    text-align: center;
+    max-width: 36ch;
+    margin: 3.5rem auto 0;
+  }
+  .treasure-copy .eyebrow { display: block; margin-bottom: 1.4rem; }
+  .treasure-copy h2 {
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 1.4rem;
+  }
+  .treasure-copy p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* —————————————————————————————
+     Voices — testimonials block
+     ————————————————————————————— */
+  .voices {
+    padding: 9rem 0;
+    text-align: center;
+  }
+  .voices .voices-icon-wrap {
+    margin-bottom: 2.5rem;
+  }
+  .voices h2.section-title {
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0 0 5rem;
+    color: var(--ink);
+  }
+  .voice {
+    max-width: 36ch;
+    margin: 0 auto;
+  }
+  .voice + .voice {
+    margin-top: 4.5rem;
+    padding-top: 4.5rem;
+    position: relative;
+  }
+  .voice + .voice::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 5px;
+    height: 5px;
+    background: var(--ink-soft);
+  }
+  .voice blockquote {
+    margin: 0 0 1.4rem;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .voice blockquote p {
+    margin: 0;
+  }
+  .voice blockquote p + p {
+    margin-top: 0.4em;
+  }
+  .voice cite {
+    font-style: normal;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .voices-footer {
+    margin-top: 6rem;
+  }
+  .voices-footer a {
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    transition: letter-spacing 0.4s ease, opacity 0.3s ease;
+  }
+  .voices-footer a:hover { letter-spacing: 0.36em; opacity: 0.7; }
+
+  /* —————————————————————————————
+     Verse
+     ————————————————————————————— */
+  .verse-section { padding: 9rem 0; text-align: center; }
+  .verse {
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 28ch;
+    margin: 2.5rem auto 0;
+  }
+
+  /* —————————————————————————————
+     Contact
+     ————————————————————————————— */
+  .contact { padding: 8rem 0 5rem; text-align: center; }
+  .contact .eyebrow { display: inline-block; margin-bottom: 1.5rem; }
+  .contact h2 {
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0 0 4rem;
+  }
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .qr-grid.qr-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 560px;
+  }
+  @media (max-width: 720px) {
+    .qr-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+  }
+  .qr-frame {
+    aspect-ratio: 1 / 1;
+    background: var(--bg);
+    border: 1px solid var(--ink-line);
+    transition: border-color 0.4s ease, transform 0.6s cubic-bezier(.2,.7,.3,1);
+    background-image:
+      linear-gradient(to right, transparent 49.6%, var(--ink-line) 49.6%, var(--ink-line) 50.4%, transparent 50.4%),
+      linear-gradient(to bottom, transparent 49.6%, var(--ink-line) 49.6%, var(--ink-line) 50.4%, transparent 50.4%);
+    opacity: 0.85;
+    overflow: hidden;
+    position: relative;
+  }
+  .qr-frame.real {
+    background-image: none;
+    opacity: 1;
+  }
+  .qr-frame.real img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .qr:hover .qr-frame {
+    border-color: var(--ink);
+    transform: translateY(-4px);
+  }
+  .qr-label {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* —————————————————————————————
+     Footer
+     ————————————————————————————— */
+  footer { padding: 4rem 0 3rem; text-align: center; }
+  footer .seed-icon {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 1.5rem;
+    display: block;
+  }
+  footer .closing {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0 0 1.4rem;
+    letter-spacing: 0.01em;
+  }
+  footer .meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ——— top nav ——— -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a href="#" class="logo-oval"><span>Effy</span></a>
+    <nav class="primary">
+      <a href="#about">About</a>
+      <a href="#practice">Practice</a>
+      <a href="#voices">Voices</a>
+      <a href="#treasure">Treasure Map</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ——— hero ——— -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Where the body begins to&nbsp;speak.</h1>
+    <p class="subline">
+      Long miles, four cities, one body.
+    </p>
+    <!-- four-city journey: city names with dot separators -->
+    <div class="journey-cities" aria-hidden="true">
+      <span>Toronto</span>
+      <span class="sep">·</span>
+      <span>Shenzhen</span>
+      <span class="sep">·</span>
+      <span>Changsha</span>
+      <span class="sep">·</span>
+      <span>Singapore</span>
+    </div>
+  </div>
+</section>
+
+<!-- ornament divider -->
+<div class="ornament" aria-hidden="true">
+  <span class="line"></span><span class="diamond"></span><span class="line"></span>
+</div>
+
+<!-- ——— about ——— -->
+<section class="spread" id="about">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center; margin-bottom: 4rem;">
+      <!-- icon: leaf -->
+      <svg class="icon" viewBox="0 0 56 56" aria-hidden="true">
+        <circle class="frame" cx="28" cy="28" r="27"/>
+        <path d="M18 38 Q24 18 38 18 Q38 32 18 38 Z"/>
+        <path d="M18 38 L34 22"/>
+      </svg>
+    </div>
+    <div class="spread-inner reveal">
+      <div class="image"><div class="frame"><img src="photo-portrait.jpg" alt="Portrait of Effy" loading="lazy"></div></div>
+      <div class="copy">
+        <span class="eyebrow">I — About</span>
+        <h2>A long way back to the&nbsp;body.</h2>
+        <p>
+          The body speaks before it speaks — in tension, in held breath,
+          in the small ways we move around what hurts.
+        </p>
+        <p>
+          This is the work: to listen — until the body answers.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament divider -->
+<div class="ornament" aria-hidden="true" style="margin-top: 3rem;">
+  <span class="line"></span><span class="diamond"></span><span class="line"></span>
+</div>
+
+<!-- ——— practice ——— -->
+<section class="spread" id="practice">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center; margin-bottom: 4rem;">
+      <!-- icon: hand / open palm — ease, touch, attention -->
+      <svg class="icon" viewBox="0 0 56 56" aria-hidden="true">
+        <circle class="frame" cx="28" cy="28" r="27"/>
+        <!-- palm -->
+        <path d="M22 40 L22 28 Q22 26 24 26 Q26 26 26 28 L26 22 Q26 20 28 20 Q30 20 30 22 L30 26 Q30 24 32 24 Q34 24 34 26 L34 30 Q34 28 36 28 Q38 28 38 30 L38 36 Q38 42 33 43 L26 43 Q22 42 22 40 Z"/>
+      </svg>
+    </div>
+    <div class="spread-inner flip reveal">
+      <div class="image"><div class="frame"><img src="photo-practice.jpg" alt="Practice — Pilates and Feldenkrais" loading="lazy"></div></div>
+      <div class="copy">
+        <span class="eyebrow">II — The Practice</span>
+        <h2>Two practices, side by&nbsp;side.</h2>
+        <p>
+          Pilates and Feldenkrais — each with its own strength,
+          its own way of working with the body.
+        </p>
+        <p>
+          Brought together for the modern body: its tensions,
+          its quiet pain, its lost sense of itself.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— verse ——— -->
+<section class="verse-section reveal">
+  <div class="wrap">
+    <!-- ornament -->
+    <div class="ornament" aria-hidden="true">
+      <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+    <p class="verse">
+      A class is a small door.<br/>
+      What matters is whether they keep walking through.
+    </p>
+  </div>
+</section>
+
+<!-- ——— voices ——— -->
+<section class="voices reveal" id="voices">
+  <div class="wrap">
+    <div class="voices-icon-wrap">
+      <!-- icon: open quotation mark inside circle — voices, listening -->
+      <svg class="icon" viewBox="0 0 56 56" aria-hidden="true">
+        <circle class="frame" cx="28" cy="28" r="27"/>
+        <!-- two soft quote marks -->
+        <path d="M20 22 Q18 22 18 25 L18 32 Q18 34 20 34 L24 34 Q26 34 26 32 L26 28 Q26 26 24 26 L20 26 Q21 22 24 22"/>
+        <path d="M32 22 Q30 22 30 25 L30 32 Q30 34 32 34 L36 34 Q38 34 38 32 L38 28 Q38 26 36 26 L32 26 Q33 22 36 22"/>
+      </svg>
+    </div>
+    <span class="eyebrow">III — Voices</span>
+    <h2 class="section-title" style="margin-top: 1.4rem;">In their own words.</h2>
+
+    <div class="voice">
+      <blockquote>
+        <p>"I told my boyfriend to hold me on the ground —</p>
+        <p>in case I fly later.</p>
+        <p>Feels so light.</p>
+        <p>Maybe a magician."</p>
+      </blockquote>
+      <cite>— Grace, after class</cite>
+    </div>
+
+    <div class="voice">
+      <blockquote>
+        <p>"I came in tired and stiff, with a niggle in the middle of my spine. I left refreshed, stretched, breathing nicely."</p>
+      </blockquote>
+      <cite>— A.S.</cite>
+    </div>
+
+    <div class="voice">
+      <blockquote>
+        <p>"Having scoliosis, I noticed after multiple sessions I no longer have back pain, and my posture when walking has improved."</p>
+      </blockquote>
+      <cite>— Evelyn · Google Review</cite>
+    </div>
+
+    <div class="voice">
+      <blockquote>
+        <p>"Knowledgeable and patient. She pays a lot of attention to form — which is crucially important for Pilates."</p>
+      </blockquote>
+      <cite>— Paola F · Google Review</cite>
+    </div>
+
+    <div class="voices-footer">
+      <a href="#" target="_blank" rel="noopener">Read more on Google →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ——— treasure map ——— -->
+<section class="spread" id="treasure">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center; margin-bottom: 4rem;">
+      <!-- icon: compass / 8-point star — treasure map -->
+      <svg class="icon" viewBox="0 0 56 56" aria-hidden="true">
+        <circle class="frame" cx="28" cy="28" r="27"/>
+        <!-- 8-point compass star -->
+        <path d="M28 12 L30 26 L44 28 L30 30 L28 44 L26 30 L12 28 L26 26 Z"/>
+        <circle class="dot" cx="28" cy="28" r="1.4"/>
+      </svg>
+    </div>
+    <div class="reveal treasure-banner">
+      <img src="photo-treasure.jpg" alt="身体藏宝图 — Treasure Map of the Body" loading="lazy">
+    </div>
+    <div class="reveal treasure-copy">
+      <span class="eyebrow">IV — An Online Practice</span>
+      <h2>Treasure Map of the&nbsp;Body.</h2>
+      <p>
+        A small, light game for sensing the body — built quietly
+        on Feldenkrais and the neuroscience of attention.
+      </p>
+      <span class="coming-soon">Coming soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- ornament divider -->
+<div class="ornament" aria-hidden="true" style="margin-top: 4rem;">
+  <span class="line"></span><span class="diamond"></span><span class="line"></span>
+</div>
+
+<!-- ——— contact ——— -->
+<section class="contact reveal" id="contact">
+  <div class="wrap">
+    <!-- icon: open door -->
+    <svg class="icon" viewBox="0 0 56 56" aria-hidden="true">
+      <circle class="frame" cx="28" cy="28" r="27"/>
+      <!-- door frame -->
+      <path d="M18 16 L18 42 L34 42 L34 16 Z"/>
+      <!-- open door (slightly ajar) -->
+      <path d="M34 16 L40 19 L40 45 L34 42"/>
+      <!-- handle -->
+      <circle class="dot" cx="32" cy="29" r="0.8"/>
+    </svg>
+    <span class="eyebrow">V — Connect</span>
+    <h2>An open door.</h2>
+    <div class="qr-grid qr-grid-3">
+      <div class="qr"><div class="qr-frame"></div><div class="qr-label">Email</div></div>
+      <div class="qr"><div class="qr-frame real"><img src="qr-instagram.png" alt="Instagram QR code" loading="lazy"></div><div class="qr-label">Instagram</div></div>
+      <div class="qr"><div class="qr-frame real"><img src="qr-wechat.png" alt="WeChat 公众号 QR code" loading="lazy"></div><div class="qr-label">微信公众号</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— footer ——— -->
+<footer>
+  <div class="wrap">
+    <!-- icon: small seed sprouting -->
+    <svg class="seed-icon" viewBox="0 0 36 36" aria-hidden="true">
+      <line x1="18" y1="14" x2="18" y2="28" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" style="stroke: var(--ink);"/>
+      <path d="M18 22 Q14 20 12 16 Q16 17 18 21" fill="none" stroke="var(--ink)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M18 18 Q22 16 24 12 Q20 13 18 17" fill="none" stroke="var(--ink)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="18" cy="29" rx="4" ry="1.5" fill="none" stroke="var(--ink)" stroke-width="0.7"/>
+    </svg>
+    <p class="closing">Awareness, kept growing.</p>
+    <p class="meta">Singapore · Effy</p>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
