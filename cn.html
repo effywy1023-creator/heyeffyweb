@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Effy — Where the body begins to speak</title>
-<meta name="description" content="A practice of Pilates and Feldenkrais — for the modern body, its tensions, its lost sense of itself." />
+<title>Effy — 身体，是一份等待拆开的礼物</title>
+<meta name="description" content="Pilates 与 Feldenkrais 的练习——给那具被困太久、值得重新认识的身体。" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -20,7 +20,7 @@
     --ink-faint: #A8A39A;           /* light stone */
     --ink-line:  #C7C2B8;           /* hairline */
 
-    --serif: 'Cormorant Garamond', Georgia, serif;
+    --serif: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', 'STSong', '宋体', Georgia, serif;
     --max: 1280px;
   }
 
@@ -150,8 +150,8 @@
     margin-left: 0.5rem;
     padding-left: 1.5rem;
     border-left: 1px solid var(--ink-line);
+    font-family: 'Cormorant Garamond', Georgia, serif;
     color: var(--ink);
-    letter-spacing: 0.1em;
   }
   @media (max-width: 720px) { nav.primary { display: none; } }
 
@@ -524,12 +524,12 @@
   <div class="wrap top-inner">
     <a href="#" class="logo-oval"><span>Effy</span></a>
     <nav class="primary">
-      <a href="#about">About</a>
-      <a href="#practice">Practice</a>
-      <a href="#voices">Voices</a>
-      <a href="#treasure">Treasure Map</a>
-      <a href="#contact">Contact</a>
-      <a href="/cn" class="lang-switch">中</a>
+      <a href="#about">关于</a>
+      <a href="#practice">练习</a>
+      <a href="#voices">回响</a>
+      <a href="#treasure">身体藏宝图</a>
+      <a href="#contact">联络</a>
+      <a href="/" class="lang-switch" lang="en">EN</a>
     </nav>
   </div>
 </header>
@@ -537,19 +537,19 @@
 <!-- ——— hero ——— -->
 <section class="hero">
   <div class="wrap">
-    <h1>Where the body begins to&nbsp;speak.</h1>
+    <h1>身体，是一份等待拆开的&nbsp;礼物。</h1>
     <p class="subline">
-      Long miles, four cities, one body.
+      且行，且看。
     </p>
     <!-- four-city journey: city names with dot separators -->
     <div class="journey-cities" aria-hidden="true">
-      <span>Toronto</span>
+      <span>多伦多</span>
       <span class="sep">·</span>
-      <span>Shenzhen</span>
+      <span>深圳</span>
       <span class="sep">·</span>
-      <span>Changsha</span>
+      <span>长沙</span>
       <span class="sep">·</span>
-      <span>Singapore</span>
+      <span>新加坡</span>
     </div>
   </div>
 </section>
@@ -571,16 +571,18 @@
       </svg>
     </div>
     <div class="spread-inner reveal">
-      <div class="image"><div class="frame"><img src="photo-portrait.jpg" alt="Portrait of Effy" loading="lazy"></div></div>
+      <div class="image"><div class="frame"><img src="photo-portrait.jpg" alt="Effy 肖像" loading="lazy"></div></div>
       <div class="copy">
-        <span class="eyebrow">I — About</span>
-        <h2>A long way back to the&nbsp;body.</h2>
+        <span class="eyebrow">I — 关于</span>
+        <h2>一段还在走的&nbsp;路。</h2>
         <p>
-          The body speaks before it speaks — in tension, in held breath,
-          in the small ways we move around what hurts.
+          三大洲、四座城。从写字楼到屏幕前，再到一张垫子上。
         </p>
         <p>
-          This is the work: to listen — until the body answers.
+          现代人的身体被困得太久——困在椅子上，困在屏幕前，困在不能停的节奏里。它一直在说话，用紧绷、用疼痛、用半夜醒来的疲惫。只是我们学会了不听。
+        </p>
+        <p>
+          我陪你把那份听的能力慢慢找回来——让身体不只是被使用、被修整、被要求好看，而是被你真正住进去：用得自在，动得愉快。
         </p>
       </div>
     </div>
@@ -604,17 +606,15 @@
       </svg>
     </div>
     <div class="spread-inner flip reveal">
-      <div class="image"><div class="frame"><img src="photo-practice.jpg" alt="Practice — Pilates and Feldenkrais" loading="lazy"></div></div>
+      <div class="image"><div class="frame"><img src="photo-practice.jpg" alt="练习 — Pilates 与 Feldenkrais" loading="lazy"></div></div>
       <div class="copy">
-        <span class="eyebrow">II — The Practice</span>
-        <h2>Two practices, side by&nbsp;side.</h2>
+        <span class="eyebrow">II — 练习</span>
+        <h2>两种练习，并肩而&nbsp;立。</h2>
         <p>
-          Pilates and Feldenkrais — each with its own strength,
-          its own way of working with the body.
+          Pilates 与 Feldenkrais。一种关于结构与精准，一种关于感知与省力。
         </p>
         <p>
-          Brought together for the modern body: its tensions,
-          its quiet pain, its lost sense of itself.
+          不强迫，不施压。让该松开的松开，让该出力的有力。让身体本来知道的事，重新被你听见。
         </p>
       </div>
     </div>
@@ -629,8 +629,8 @@
       <span class="line"></span><span class="diamond"></span><span class="line"></span>
     </div>
     <p class="verse">
-      A class is a small door.<br/>
-      What matters is whether they keep walking through.
+      身体的改变，不停留在一节课里。<br/>
+      在一次又一次的看见里。
     </p>
   </div>
 </section>
@@ -647,8 +647,8 @@
         <path d="M32 22 Q30 22 30 25 L30 32 Q30 34 32 34 L36 34 Q38 34 38 32 L38 28 Q38 26 36 26 L32 26 Q33 22 36 22"/>
       </svg>
     </div>
-    <span class="eyebrow">III — Voices</span>
-    <h2 class="section-title" style="margin-top: 1.4rem;">In their own words.</h2>
+    <span class="eyebrow">III — 回响</span>
+    <h2 class="section-title" style="margin-top: 1.4rem;">来自他们的话。</h2>
 
     <div class="voice">
       <blockquote>
@@ -662,27 +662,27 @@
 
     <div class="voice">
       <blockquote>
-        <p>"I came in tired and stiff, with a niggle in the middle of my spine. I left refreshed, stretched, breathing nicely."</p>
+        <p>"我带着疲惫和僵硬来上课，背中间有点不舒服。结束时整个人是松开的，呼吸也顺畅了。"</p>
       </blockquote>
       <cite>— A.S.</cite>
     </div>
 
     <div class="voice">
       <blockquote>
-        <p>"Having scoliosis, I noticed after multiple sessions I no longer have back pain, and my posture when walking has improved."</p>
+        <p>"我有脊柱侧弯。上了几节课之后，腰背不再痛了，走路的姿态也变了。"</p>
       </blockquote>
       <cite>— Evelyn · Google Review</cite>
     </div>
 
     <div class="voice">
       <blockquote>
-        <p>"Knowledgeable and patient. She pays a lot of attention to form — which is crucially important for Pilates."</p>
+        <p>"很专业，也很有耐心。她非常注重动作的形状——这对普拉提是关键。"</p>
       </blockquote>
       <cite>— Paola F · Google Review</cite>
     </div>
 
     <div class="voices-footer">
-      <a href="#" target="_blank" rel="noopener">Read more on Google →</a>
+      <a href="#" target="_blank" rel="noopener">更多回响在 Google →</a>
     </div>
   </div>
 </section>
@@ -700,16 +700,16 @@
       </svg>
     </div>
     <div class="reveal treasure-banner">
-      <img src="photo-treasure.jpg" alt="身体藏宝图 — Treasure Map of the Body" loading="lazy">
+      <img src="photo-treasure.jpg" alt="身体藏宝图" loading="lazy">
     </div>
     <div class="reveal treasure-copy">
-      <span class="eyebrow">IV — An Online Practice</span>
-      <h2>Treasure Map of the&nbsp;Body.</h2>
+      <span class="eyebrow">IV — 线上练习</span>
+      <h2>身体藏宝图。</h2>
       <p>
-        A small, light game for sensing the body — built quietly
-        on Feldenkrais and the neuroscience of attention.
+        一张关于身体的地图。<br>
+        玩一场关于觉察的小游戏。
       </p>
-      <span class="coming-soon">Coming soon</span>
+      <span class="coming-soon">即将上线</span>
     </div>
   </div>
 </section>
@@ -732,12 +732,12 @@
       <!-- handle -->
       <circle class="dot" cx="32" cy="29" r="0.8"/>
     </svg>
-    <span class="eyebrow">V — Connect</span>
-    <h2>An open door.</h2>
+    <span class="eyebrow">V — 联络</span>
+    <h2>来拆礼物吧。</h2>
     <div class="qr-grid qr-grid-3">
-      <div class="qr"><div class="qr-frame"></div><div class="qr-label">Email</div></div>
-      <div class="qr"><div class="qr-frame real"><img src="qr-instagram.png" alt="Instagram QR code" loading="lazy"></div><div class="qr-label">Instagram</div></div>
-      <div class="qr"><div class="qr-frame real"><img src="qr-wechat.png" alt="WeChat 公众号 QR code" loading="lazy"></div><div class="qr-label">微信公众号</div></div>
+      <div class="qr"><div class="qr-frame"></div><div class="qr-label">邮箱</div></div>
+      <div class="qr"><div class="qr-frame real"><img src="qr-instagram.png" alt="Instagram 二维码" loading="lazy"></div><div class="qr-label">Instagram</div></div>
+      <div class="qr"><div class="qr-frame real"><img src="qr-wechat.png" alt="微信公众号二维码" loading="lazy"></div><div class="qr-label">微信公众号</div></div>
     </div>
   </div>
 </section>
@@ -752,8 +752,8 @@
       <path d="M18 18 Q22 16 24 12 Q20 13 18 17" fill="none" stroke="var(--ink)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
       <ellipse cx="18" cy="29" rx="4" ry="1.5" fill="none" stroke="var(--ink)" stroke-width="0.7"/>
     </svg>
-    <p class="closing">Awareness, kept growing.</p>
-    <p class="meta">Singapore · Effy</p>
+    <p class="closing">你听，身体的低语。</p>
+    <p class="meta">新加坡 · Effy</p>
   </div>
 </footer>
 
