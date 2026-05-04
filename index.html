@@ -67,26 +67,37 @@
      Decorative bits
      ————————————————————————————— */
 
-  /* Oval logo (Diptyque signature) */
+  /* Logo — dotted bracket style (no border) */
   .logo-oval {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--ink);
-    border-radius: 50%;
-    padding: 0.55rem 1.6rem;
     text-decoration: none;
     color: var(--ink);
-    transition: all 0.5s ease;
+    transition: opacity 0.4s ease;
   }
   .logo-oval span {
     font-size: 0.85rem;
     letter-spacing: 0.5em;
     text-transform: uppercase;
-    padding-right: 0;
-    padding-left: 0.5em; /* compensate letter-spacing */
+    padding: 0 1.2em;
+    position: relative;
   }
-  .logo-oval:hover { background: var(--ink); color: var(--bg); }
+  /* The two dots framing the wordmark */
+  .logo-oval span::before,
+  .logo-oval span::after {
+    content: "·";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-58%);
+    font-size: 1.4em;
+    letter-spacing: 0;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .logo-oval span::before { left: 0; }
+  .logo-oval span::after  { right: 0; }
+  .logo-oval:hover { opacity: 0.6; }
 
   /* Section icon — line illustration in a thin circle */
   .icon {

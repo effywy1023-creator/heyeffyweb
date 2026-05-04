@@ -8,7 +8,20 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'LXGW WenKai';
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/files/lxgwwenkai-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'LXGW WenKai';
+  font-display: swap;
+  font-weight: 300;
+  src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/files/lxgwwenkai-light.woff2') format('woff2');
+}
+</style>
 
 <style>
   :root {
@@ -20,7 +33,7 @@
     --ink-faint: #A8A39A;           /* light stone */
     --ink-line:  #C7C2B8;           /* hairline */
 
-    --serif: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', 'STSong', '宋体', Georgia, serif;
+    --serif: 'Cormorant Garamond', 'LXGW WenKai', 'LXGW WenKai Screen', 'Kaiti SC', 'STKaiti', '楷体', Georgia, serif;
     --max: 1280px;
   }
 
@@ -32,12 +45,23 @@
     color: var(--ink);
     font-family: var(--serif);
     font-weight: 400;
-    font-size: 1.0625rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.85;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
+
+  /* CN-specific: prevent letter-spacing from breaking Chinese characters apart.
+     letter-spacing is meaningful for Latin text (uppercase labels), but on CJK
+     it makes each character drift. We zero it out on body text and re-apply it
+     only on the small labels/eyebrows where it's intentional and the text is
+     mostly English/numerals. */
+  body, p, h1, h2, h3, blockquote, cite, .verse, .closing {
+    letter-spacing: 0;
+  }
+  /* Slightly looser paragraph spacing for kaiti */
+  p + p { margin-top: 1.4rem; }
 
   /* very subtle paper grain */
   body::before {
@@ -63,30 +87,48 @@
     font-weight: 500;
   }
 
+  /* (CN) Decorations removed — keeping classes but no visual effect */
+  .eyebrow.framed { padding: 0; }
+  .eyebrow.framed::before,
+  .eyebrow.framed::after { content: none; }
+  .eyebrow-underline { display: none; }
+
   /* —————————————————————————————
      Decorative bits
      ————————————————————————————— */
 
   /* Oval logo (Diptyque signature) */
+  /* Logo — dotted bracket style (no border) */
   .logo-oval {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--ink);
-    border-radius: 50%;
-    padding: 0.55rem 1.6rem;
     text-decoration: none;
     color: var(--ink);
-    transition: all 0.5s ease;
+    transition: opacity 0.4s ease;
   }
   .logo-oval span {
     font-size: 0.85rem;
     letter-spacing: 0.5em;
     text-transform: uppercase;
-    padding-right: 0;
-    padding-left: 0.5em; /* compensate letter-spacing */
+    padding: 0 1.2em;
+    position: relative;
   }
-  .logo-oval:hover { background: var(--ink); color: var(--bg); }
+  /* The two dots framing the wordmark */
+  .logo-oval span::before,
+  .logo-oval span::after {
+    content: "·";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-58%);
+    font-size: 1.4em;
+    letter-spacing: 0;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .logo-oval span::before { left: 0; }
+  .logo-oval span::after  { right: 0; }
+  .logo-oval:hover { opacity: 0.6; }
 
   /* Section icon — line illustration in a thin circle */
   .icon {
@@ -269,13 +311,13 @@
     max-width: 16ch;
   }
   .copy p {
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: 1rem;
+    line-height: 1.95;
     color: var(--ink);
     margin: 0;
     max-width: 32ch;
   }
-  .copy p + p { margin-top: 1rem; }
+  .copy p + p { margin-top: 1.4rem; }
 
   a.discover {
     display: inline-block;
@@ -398,17 +440,25 @@
   .voices-footer {
     margin-top: 6rem;
   }
-  .voices-footer a {
+
+  /* Diptyque-style action button — solid pill */
+  .btn-pill {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.85rem 2.2rem;
+    border-radius: 999px;
     font-size: 0.72rem;
     letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--ink);
     text-decoration: none;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--ink);
-    transition: letter-spacing 0.4s ease, opacity 0.3s ease;
+    font-weight: 500;
+    transition: opacity 0.3s ease, transform 0.5s cubic-bezier(.2,.7,.3,1);
   }
-  .voices-footer a:hover { letter-spacing: 0.36em; opacity: 0.7; }
+  .btn-pill:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
 
   /* —————————————————————————————
      Verse
@@ -573,7 +623,8 @@
     <div class="spread-inner reveal">
       <div class="image"><div class="frame"><img src="photo-portrait.jpg" alt="Effy 肖像" loading="lazy"></div></div>
       <div class="copy">
-        <span class="eyebrow">I — 关于</span>
+        <span class="eyebrow framed">I — 关于</span>
+        <span class="eyebrow-underline"></span>
         <h2>一段还在走的&nbsp;路。</h2>
         <p>
           三大洲、四座城。从写字楼到屏幕前，再到一张垫子上。
@@ -608,7 +659,8 @@
     <div class="spread-inner flip reveal">
       <div class="image"><div class="frame"><img src="photo-practice.jpg" alt="练习 — Pilates 与 Feldenkrais" loading="lazy"></div></div>
       <div class="copy">
-        <span class="eyebrow">II — 练习</span>
+        <span class="eyebrow framed">II — 练习</span>
+        <span class="eyebrow-underline"></span>
         <h2>两种练习，并肩而&nbsp;立。</h2>
         <p>
           Pilates 与 Feldenkrais。一种关于结构与精准，一种关于感知与省力。
@@ -647,7 +699,8 @@
         <path d="M32 22 Q30 22 30 25 L30 32 Q30 34 32 34 L36 34 Q38 34 38 32 L38 28 Q38 26 36 26 L32 26 Q33 22 36 22"/>
       </svg>
     </div>
-    <span class="eyebrow">III — 回响</span>
+    <span class="eyebrow framed">III — 回响</span>
+    <span class="eyebrow-underline"></span>
     <h2 class="section-title" style="margin-top: 1.4rem;">来自他们的话。</h2>
 
     <div class="voice">
@@ -682,7 +735,7 @@
     </div>
 
     <div class="voices-footer">
-      <a href="#" target="_blank" rel="noopener">更多回响在 Google →</a>
+      <a href="#" class="btn-pill" target="_blank" rel="noopener">更多回响在 Google</a>
     </div>
   </div>
 </section>
@@ -703,7 +756,8 @@
       <img src="photo-treasure.jpg" alt="身体藏宝图" loading="lazy">
     </div>
     <div class="reveal treasure-copy">
-      <span class="eyebrow">IV — 线上练习</span>
+      <span class="eyebrow framed">IV — 线上练习</span>
+      <span class="eyebrow-underline"></span>
       <h2>身体藏宝图。</h2>
       <p>
         一张关于身体的地图。<br>
@@ -732,7 +786,8 @@
       <!-- handle -->
       <circle class="dot" cx="32" cy="29" r="0.8"/>
     </svg>
-    <span class="eyebrow">V — 联络</span>
+    <span class="eyebrow framed">V — 联络</span>
+    <span class="eyebrow-underline"></span>
     <h2>来拆礼物吧。</h2>
     <div class="qr-grid qr-grid-3">
       <div class="qr"><div class="qr-frame"></div><div class="qr-label">邮箱</div></div>
