@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CranioSacral Therapy — Effy</title>
+<meta name="description" content="A touch of just 5 grams. CST listens to the body's deep rhythms to release restrictions that movement alone cannot reach." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:        #EDE9E0;
+    --bg-deep:   #E2DDD2;
+    --ink:       #2B2A26;
+    --ink-soft:  #6E6B62;
+    --ink-faint: #A8A39A;
+    --ink-line:  #C7C2B8;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --max: 1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.22;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.15  0 0 0 0 0.12  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 2; }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* Logo */
+  .logo-oval {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--ink);
+    transition: opacity 0.4s ease;
+  }
+  .logo-oval span {
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    padding: 0 1.2em;
+    position: relative;
+  }
+  .logo-oval span::before,
+  .logo-oval span::after {
+    content: "·";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-58%);
+    font-size: 1.4em;
+    letter-spacing: 0;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .logo-oval span::before { left: 0; }
+  .logo-oval span::after  { right: 0; }
+  .logo-oval:hover { opacity: 0.6; }
+
+  .icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 2rem;
+    display: block;
+  }
+  .icon circle.frame {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 0.8;
+  }
+  .icon path, .icon line, .icon polyline, .icon circle.dot {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 0.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .icon circle.dot { fill: var(--ink); stroke: none; }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 0 auto;
+    width: 220px;
+    color: var(--ink-faint);
+  }
+  .ornament .line { flex: 1; height: 1px; background: var(--ink-line); }
+  .ornament .diamond {
+    width: 6px; height: 6px;
+    background: var(--ink-soft);
+    transform: rotate(45deg);
+  }
+
+  /* Nav */
+  header.top { padding: 2rem 0; }
+  .top-inner { display: flex; align-items: center; justify-content: space-between; }
+  nav.primary { display: flex; gap: 2.5rem; }
+  nav.primary a {
+    font-size: 0.74rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.4s ease;
+  }
+  nav.primary a:hover { color: var(--ink); }
+  @media (max-width: 720px) { nav.primary { display: none; } }
+
+  /* Hero */
+  .hero { padding: 8rem 0 6rem; text-align: center; }
+  .hero .eyebrow {
+    display: block;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: rise 1s 0.2s ease-out forwards;
+  }
+  .hero h1 {
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 auto;
+    max-width: 18ch;
+    color: var(--ink);
+    opacity: 0;
+    animation: rise 1.4s 0.3s ease-out forwards;
+  }
+  .hero .subline {
+    margin: 3rem auto 0;
+    max-width: 44ch;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0;
+    animation: rise 1.2s 0.9s ease-out forwards;
+  }
+  .hero::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 72px;
+    background: var(--ink-line);
+    margin: 5rem auto 0;
+    opacity: 0;
+    animation: rise 1.2s 1.2s ease-out forwards;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Content sections */
+  .chapter { padding: 7rem 0; max-width: 680px; margin: 0 auto; }
+  .chapter .chapter-eyebrow {
+    display: block;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .chapter h2 {
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 2.5rem;
+    text-align: center;
+  }
+  .chapter p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin: 0 0 1.2rem;
+  }
+  .chapter strong {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Signs list */
+  .signs-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+  }
+  .signs-list li {
+    padding: 1.6rem 0;
+    border-top: 1px solid var(--ink-line);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+  .signs-list li:last-child { border-bottom: 1px solid var(--ink-line); }
+  .sign-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--ink-soft);
+    transform: rotate(45deg);
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+  .sign-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+  .sign-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* Stories */
+  .story {
+    padding: 2rem 0;
+    border-top: 1px solid var(--ink-line);
+  }
+  .story:last-of-type { border-bottom: 1px solid var(--ink-line); }
+  .story-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .story p {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* closing verse */
+  .closing-verse {
+    padding: 7rem 0;
+    text-align: center;
+  }
+  .closing-verse p {
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 30ch;
+    margin: 2rem auto 0;
+  }
+
+  a.back-link {
+    display: inline-block;
+    margin-top: 3rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    transition: letter-spacing 0.4s ease, opacity 0.3s ease;
+  }
+  a.back-link:hover { letter-spacing: 0.36em; opacity: 0.7; }
+
+  /* Footer */
+  footer { padding: 4rem 0 3rem; text-align: center; }
+  footer .closing {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0 0 1.4rem;
+  }
+  footer .meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- nav -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a href="/" class="logo-oval"><span>Effy</span></a>
+    <nav class="primary">
+      <a href="/#about">About</a>
+      <a href="/#practice">Practice</a>
+      <a href="/#voices">Voices</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">CranioSacral Therapy</span>
+    <h1>The 5-gram calibration.</h1>
+    <p class="subline">
+      A touch lighter than a coin. A recalibration deeper than muscle.
+    </p>
+  </div>
+</section>
+
+<div class="ornament" aria-hidden="true">
+  <span class="line"></span><span class="diamond"></span><span class="line"></span>
+</div>
+
+<!-- hero image -->
+<div class="wrap reveal" style="max-width: 680px; margin: 4rem auto;">
+  <div style="border: 1px solid var(--ink-line); overflow: hidden; aspect-ratio: 3/4;">
+    <img src="IMG_4975.JPG" alt="Effy performing CranioSacral Therapy" style="width:100%; height:100%; object-fit:cover; display:block;">
+  </div>
+</div>
+
+<!-- 01 / Mechanics -->
+<div class="wrap">
+  <div class="chapter reveal">
+    <span class="eyebrow chapter-eyebrow">01 — The Mechanics of Stillness</span>
+    <h2>The system that holds everything together.</h2>
+    <p>
+      Your spinal cord and brain are cocooned in a continuous, fluid-filled hydraulic
+      loop — the craniosacral system. When chronic stress or physical trauma locks your
+      nervous system into a permanent "flight" response, this system tightens, putting
+      an invisible brake on your entire structural movement.
+    </p>
+    <p>
+      <strong>CST doesn't force the system. It listens.</strong>
+    </p>
+    <p>
+      Using a touch of just 5 grams — the weight of a nickel — I interface with your
+      body's deep, subconscious rhythms to release restrictions along the spine and
+      cranial bones. It is a precise, micro-level recalibration that drops an overworked
+      brain back into a deep, autonomous state of rest.
+    </p>
+  </div>
+</div>
+
+<div class="ornament reveal" aria-hidden="true" style="margin: 2rem auto;">
+  <span class="line"></span><span class="diamond"></span><span class="line"></span>
+</div>
+
+<!-- 02 / Signs -->
+<div class="wrap">
+  <div class="chapter reveal">
+    <span class="eyebrow chapter-eyebrow">02 — Signs of a Locked System</span>
+    <h2>When the body signals through stubborn patterns.</h2>
+    <p>
+      When the deep craniosacral axis loses its mobility, it signals through specific,
+      persistent patterns. This work is highly effective if your system exhibits any
+      of the following:
+    </p>
+    <ul class="signs-list">
+      <li>
+        <span class="sign-diamond"></span>
+        <div>
+          <span class="sign-label">The "Always-On" Loop</span>
+          <p class="sign-body">Mind racing, shallow sleep, chronic fatigue — a nervous system that has forgotten how to safely down-regulate.</p>
+        </div>
+      </li>
+      <li>
+        <span class="sign-diamond"></span>
+        <div>
+          <span class="sign-label">The Chronic Clencher</span>
+          <p class="sign-body">Waking with a tight jaw, clicking TMJ, night-time teeth grinding, or tension headaches radiating from the base of the skull.</p>
+        </div>
+      </li>
+      <li>
+        <span class="sign-diamond"></span>
+        <div>
+          <span class="sign-label">The Hidden Brake</span>
+          <p class="sign-body">A stubborn, deep-seated restriction in your spine, pelvis, or shoulders that standard tissue manipulation or stretching cannot unlatch.</p>
+        </div>
+      </li>
+      <li>
+        <span class="sign-diamond"></span>
+        <div>
+          <span class="sign-label">The Traumatic Print</span>
+          <p class="sign-body">Lingering compression, brain-fog, or structural compensation patterns following an old physical impact or intense athletic strain.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="ornament reveal" aria-hidden="true" style="margin: 2rem auto;">
+  <span class="line"></span><span class="diamond"></span><span class="line"></span>
+</div>
+
+<!-- 03 / Individual Landscape -->
+<div class="wrap">
+  <div class="chapter reveal">
+    <span class="eyebrow chapter-eyebrow">03 — The Individual Landscape</span>
+    <h2>The tissue unlocks in its own language.</h2>
+    <p>
+      Because this work speaks directly to your cellular archive, your system dictates
+      the path. There is no template.
+    </p>
+
+    <div class="story reveal">
+      <span class="story-label">The Unwinding</span>
+      <p>
+        During a recent session, a client's leg began to spontaneously twist, float,
+        and micro-adjust entirely on its own — her deep fascial network was actively
+        unknotting decades of mechanical bracing.
+      </p>
+    </div>
+
+    <div class="story reveal">
+      <span class="story-label">The Archive</span>
+      <p>
+        Another client lay in complete, motionless silence, only for the decompression
+        of her cranial sutures to surface a vivid, long-forgotten memory. Her body had
+        stored the narrative of a past event in the tissue; as the physical restriction
+        dissolved, the memory finally cleared.
+      </p>
+    </div>
+
+    <p style="margin-top: 2.5rem;">
+      Whether your system responds with visceral physical movement, an emotional
+      clearing, or a profound, quiet stillness — we go where the map leads.
+    </p>
+  </div>
+</div>
+
+<!-- closing -->
+<section class="closing-verse reveal">
+  <div class="wrap" style="text-align:center;">
+    <div class="ornament" aria-hidden="true" style="margin: 0 auto 3rem;">
+      <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+    <p>
+      5 grams of touch.<br/>
+      A lifetime of holding, released.
+    </p>
+    <a href="/#contact" class="back-link">Book a session &rarr;</a>
+    <p style="margin-top: 3rem; font-size: 0.8rem; letter-spacing: 0.1em; color: var(--ink-soft);">
+      Discover more about CranioSacral Therapy that I practice, please visit
+      <a href="https://www.upledger.com/courses/discover" target="_blank" rel="noopener" style="color: var(--ink); text-underline-offset: 3px;">The Upledger Institute &rarr;</a>
+    </p>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <p class="closing">Awareness, kept growing.</p>
+    <p class="meta">Singapore · Effy</p>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
